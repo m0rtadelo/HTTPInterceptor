@@ -8,6 +8,11 @@ http.createServer(function (req, res) {
         target: `http://${req.headers['host']}`,
         selfHandleResponse: true
     };
+/*
+    proxy.on('proxyReq', function (proxyReq, req, res) {
+        res.end('intercepted!')
+    });
+*/
     proxy.on('proxyRes', function (proxyRes, req, res) {
         var body = [];
         if (proxyRes.eventNames().length < 2) {
@@ -34,6 +39,7 @@ http.createServer(function (req, res) {
             });
         }
     });
+
     proxy.on('error', function (err) {
         console.error(err);
     })
