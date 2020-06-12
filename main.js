@@ -8,23 +8,25 @@ http.createServer(function (req, res) {
     };
     proxy.on('proxyRes', function (proxyRes, req, res) {
         var body = [];
-        proxyRes.on('data', function (chunk) {
-            body.push(chunk);
-        });
-        proxyRes.on('end', function () {
-            const switchHeaders = (res, headers) => {
-                if (!res.headersSent) {
-                    Object.keys(headers).forEach(key => {
-                        res.setHeader(key, headers[key])
-                    })
+        if (proxyRes.eventNames().length < 2) {
+            proxyRes.on('data', function (chunk) {
+                body.push(chunk);
+            });
+            proxyRes.on('end', function () {
+                const switchHeaders = (res, headers) => {
+                    if (!res.headersSent) {
+                        Object.keys(headers).forEach(key => {
+                            res.setHeader(key, headers[key])
+                        })
+                    }
                 }
-            }
-            switchHeaders(res, this.headers)
-            const response = Buffer.concat(body);
-            console.log("end - ", this.req.path);
-            res.statusCode = this.statusCode;
-            res.end(response);
-        });
+                switchHeaders(res, this.headers)
+                const response = Buffer.concat(body);
+                console.log(`${this.req.method} ${this.req.path}`)
+                res.statusCode = this.statusCode;
+                res.end(response);
+            });
+        }
     });
     proxy.web(req, res, option);
 }).listen(8008);
