@@ -2,8 +2,9 @@ const http = require('http'), httpProxy = require('http-proxy');
 var proxy = httpProxy.createProxyServer();
 
 http.createServer(function (req, res) {
+
     var option = {
-        target: 'http://192.168.1.6:8123',
+        target: `http://${req.headers['host']}`,
         selfHandleResponse: true
     };
     proxy.on('proxyRes', function (proxyRes, req, res) {
@@ -22,11 +23,14 @@ http.createServer(function (req, res) {
                 }
                 switchHeaders(res, this.headers)
                 const response = Buffer.concat(body);
-                console.log(`${this.req.method} ${this.req.path}`)
+                console.log(`${this.statusCode} ${this.req.method} ${this.req._headers['host']} ${this.req.path} HTTP/${this.httpVersion}`)
                 res.statusCode = this.statusCode;
                 res.end(response);
             });
         }
     });
+    proxy.on('error', function (err) {
+        console.error(err);
+    })
     proxy.web(req, res, option);
 }).listen(8008);
