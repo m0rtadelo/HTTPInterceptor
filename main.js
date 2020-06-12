@@ -1,4 +1,5 @@
 const http = require('http'), httpProxy = require('http-proxy');
+const rules = require('./rules.json');
 var proxy = httpProxy.createProxyServer();
 
 http.createServer(function (req, res) {
@@ -15,7 +16,7 @@ http.createServer(function (req, res) {
             });
             proxyRes.on('end', function () {
                 const switchHeaders = (res, headers) => {
-                    if (!res.headersSent) {
+                    if (!res.headersSent && headers) {
                         Object.keys(headers).forEach(key => {
                             res.setHeader(key, headers[key])
                         })
@@ -25,7 +26,11 @@ http.createServer(function (req, res) {
                 const response = Buffer.concat(body);
                 console.log(`${this.statusCode} ${this.req.method} ${this.req._headers['host']} ${this.req.path} HTTP/${this.httpVersion}`)
                 res.statusCode = this.statusCode;
-                res.end(response);
+                if (rules[this.req.path]) {
+                    res.end(JSON.stringify(rules[this.req.path]))
+                } else {
+                    res.end(response);
+                }
             });
         }
     });
