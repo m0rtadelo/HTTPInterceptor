@@ -221,11 +221,135 @@
                     }
                 }
             }
+        },
+        " /api/oauth/token": {
+            "status": "200",
+            "headers": {
+                "transfer-encoding": "deflate"
+            },            
+            "body": {
+                "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJzaWNhcyIsInNjb3BlIjpbImRhZ2RhLXdlYiJdLCJkZXRhaWxzIjp7Im5hbWUiOiJBZG1pbmlzdHJhZG9yIiwic3VybmFtZTEiOiJTSUNBUyIsInN1cm5hbWUyIjpudWxsLCJlbnRpdHkiOiJMRVMgQ09SVFMgVUFHIiwiZW50aXR5TmFtZSI6IkJBUkNFTE9OQSBFTVBMRUFEQSIsInVhZ0NvZGUiOiJBRzA4MDAwMTA5IiwibWFuYWdpbmdFbnRpdHkiOiIxMDAwMSIsIm1hbmFnaW5nRW50aXR5Q2VudGVyVHlwZSI6IjAyIiwic2Vzc2lvbklkIjoiSlNFU1NJT05JRD1XNDJaZGxJdVJkbG52b0tuODJzY2VIOUVlUlhORWsxN0VUeDJjR2k3VzMyYUVGSVZjWnAyITQwMjQ5MDIxNSFOT05FIiwibWF4SW5hY3RpdmVJbnRlcnZhbCI6MzAwLCJnaWNhcklkIjoiMzgyMzAwMjNLIn0sImV4cCI6MTU5MTcxNjE3NiwianRpIjoiMjljMWFkNWEtM2Q5MS00MTFiLWE3ZjItNzJhYTUyMzhlMjFiIiwiY2xpZW50X2lkIjoic2ljYXMtd2ViLWlkIn0.h4I_FVEGMsH2OORdNvUbeSZi1FiNZ9Fh5TXzim7KMaM",
+                "token_type": "bearer",
+                "expires_in": 3599,
+                "scope": "dagda-web",
+                "user_name": "sicas",
+                "details": [
+                    {
+                        "name": "Administrador",
+                        "surname1": "SICAS",
+                        "entity": "LES CORTS UAG",
+                        "entityName": "BARCELONA EMPLEADA",
+                        "uagCode": "AG08000109",
+                        "managingEntity": "10001",
+                        "managingEntityCenterType": "02",
+                        "sessionId": "JSESSIONID=Td2ZWOlD5xk_gBf2J9_tk7-MD9rApTzAeo9AI0iCkMmCu1Pdbrkv!402490215!NONE",
+                        "maxInactiveInterval": 300,
+                        "gicarId": "38230023K"
+                    },
+                    {
+                        "name": "Administrador2",
+                        "surname1": "SICAS2",
+                        "entity": "LES CORTS UAG2",
+                        "entityName": "BARCELONA EMPLEADA2",
+                        "uagCode": "AG08000109",
+                        "managingEntity": "10001",
+                        "managingEntityCenterType": "02",
+                        "sessionId": "JSESSIONID=Td2ZWOlD5xk_gBf2J9_tk7-MD9rApTzAeo9AI0iCkMmCu1Pdbrkv!402490215!NONE",
+                        "maxInactiveInterval": 300,
+                        "gicarId": "38230023K"
+                    }
+                ],
+                "jti": "ffe04f89-f33d-4b83-8a2b-1802715fc86c"
+            }
         }
     },
     "request": {
-        "/api/oauth/token": {
-            "data": {
+        "/api/demands/previous-services-inscription/search": {
+            "status": "200",
+            "headers": {
+                "transfer-encoding": "deflate",
+                "content-type": "application/json;charset=UTF-8"
+            },
+            "body": {
+                "data": {
+                    "result": {},
+                    "target": "deminsservprev",
+                    "uuid": "c86115e2-6436-4da6-9456-a9c704fe1e78",
+                    "physicalPerson": {
+                        "name": "NOM1",
+                        "surname1": "1COGNOM1",
+                        "surname2": "COGNOM2",
+                        "birthDate": "2004-06-10T22:00:00Z",
+                        "genderId": "1",
+                        "academicLevelId": "33",
+                        "nameMeaning": "NOM SENTIT",
+                        "genreId": "2",
+                        "oldCardId": {},
+                        "cardId": {
+                            "typeId": "D",
+                            "number": "57902341",
+                            "letter": "W"
+                        },
+                        "socialSecurity": {},
+                        "handicap": {},
+                        "residentialAddress": {
+                            "territory": {
+                                "countryId": "724",
+                                "provinceId": "08",
+                                "municipalityId": "08200"
+                            },
+                            "street": {
+                                "name": "COPE",
+                                "number": "1",
+                                "typeId": "CP"
+                            },
+                            "postalCodeId": "08830",
+                            "supramunicipalEntityId": "0911"
+                        },
+                        "phones": {
+                            "phone1": {},
+                            "phone2": {},
+                            "phone3": {},
+                            "phone4": {}
+                        },
+                        "emailPreferences": {
+                            "notProvidedId": "2",
+                            "preferredLanguageId": "90",
+                            "isBraille": false
+                        },
+                        "guaranteedIncome": {
+                            "approval": {},
+                            "completion": {},
+                            "denial": {},
+                            "withdrawal": {},
+                            "possibleResult": {},
+                            "result": {}
+                        },
+                        "confidentiality": {},
+                        "nonUEAuthorization": {
+                            "territory": {},
+                            "expectedRenewal": {}
+                        },
+                        "exist": false
+                    },
+                    "registryInfo": {
+                        "currentJobSituationId": "01",
+                        "administrativeSituation": {
+                            "actual": {}
+                        },
+                        "occupationalSituation": {
+                            "actual": {}
+                        },
+                        "uag": {},
+                        "europeanSocialFund": {},
+                        "exist": false
+                    }
+                }
+            }
+        },
+        " /api/oauth/token": {
+            "status": 200,
+            "body": {
                 "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJzaWNhcyIsInNjb3BlIjpbImRhZ2RhLXdlYiJdLCJkZXRhaWxzIjp7Im5hbWUiOiJBZG1pbmlzdHJhZG9yIiwic3VybmFtZTEiOiJTSUNBUyIsInN1cm5hbWUyIjpudWxsLCJlbnRpdHkiOiJMRVMgQ09SVFMgVUFHIiwiZW50aXR5TmFtZSI6IkJBUkNFTE9OQSBFTVBMRUFEQSIsInVhZ0NvZGUiOiJBRzA4MDAwMTA5IiwibWFuYWdpbmdFbnRpdHkiOiIxMDAwMSIsIm1hbmFnaW5nRW50aXR5Q2VudGVyVHlwZSI6IjAyIiwic2Vzc2lvbklkIjoiSlNFU1NJT05JRD1XNDJaZGxJdVJkbG52b0tuODJzY2VIOUVlUlhORWsxN0VUeDJjR2k3VzMyYUVGSVZjWnAyITQwMjQ5MDIxNSFOT05FIiwibWF4SW5hY3RpdmVJbnRlcnZhbCI6MzAwLCJnaWNhcklkIjoiMzgyMzAwMjNLIn0sImV4cCI6MTU5MTcxNjE3NiwianRpIjoiMjljMWFkNWEtM2Q5MS00MTFiLWE3ZjItNzJhYTUyMzhlMjFiIiwiY2xpZW50X2lkIjoic2ljYXMtd2ViLWlkIn0.h4I_FVEGMsH2OORdNvUbeSZi1FiNZ9Fh5TXzim7KMaM",
                 "token_type": "bearer",
                 "expires_in": 3599,
