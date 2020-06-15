@@ -1,7 +1,7 @@
 {
-  "name": "http-proxy-poc",
+  "name": "my_proxy",
   "version": "1.0.0",
-  "description": "http proxy based poc",
+  "description": "http proxy to inject customized body responses",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,8 @@
   "keywords": [
     "http",
     "proxy",
-    "poc"
+    "mim",
+    "interceptor"
   ],
   "author": "ricard.figuls@altran.com",
   "license": "ISC",
