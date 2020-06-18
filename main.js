@@ -1,19 +1,19 @@
 const http = require('http'); const httpProxy = require('http-proxy')
-const rules = require('./rules.json')
+const { rules, options } = require('./settings.json')
 const url = require('url')
 var proxy = httpProxy.createProxyServer()
-const OPTIONS = {
-  response: true,
-  request: true,
-  forceIdentity: true
+
+const VALUES = {
+  counter: 0
 }
+
 http.createServer(function (req, res) {
   var option = {
     target: `http://${req.headers.host}`,
     selfHandleResponse: true
   }
   const path = new url.URL(req.url).pathname
-  let counter = 0
+
   const switchHeaders = (res, headers) => {
     if (!res.headersSent && headers) {
       Object.keys(headers).forEach(key => {
@@ -22,24 +22,34 @@ http.createServer(function (req, res) {
     }
   }
 
-  if ((OPTIONS.request && rules.request[path]) || OPTIONS.forceIdentity) {
-    proxy.on('proxyReq', function (proxyReq, req, res) {
-      if (OPTIONS.forceIdentity) {
-        proxyReq.setHeader('Accept-Encoding', 'identity')
-      }
-      if (proxyReq.path === path && (OPTIONS.request && rules.request[path])) {
-        res.statusCode = rules.request[path].status || 200
-        switchHeaders(res, rules.request[path].headers)
-        req = undefined
-        proxyReq = undefined
-        const ruleBody = JSON.parse(JSON.stringify(rules.request[path].body))
-        ruleBody.access_token = OPTIONS.accesstoken
-        switchHeaders(res, { 'content-length': JSON.stringify(ruleBody).length + 3 })
-        res.end(JSON.stringify(ruleBody))
-      }
+  const getPassthrough = (entity) => {
+    rules.passthrough.forEach((pt) => {
+      entity[pt.output] = VALUES[pt.input]
     })
   }
-  if (!(OPTIONS.request && rules.request[path])) {
+
+  const setPassthrough = (entity) => {
+    rules.passthrough.forEach((pt) => {
+      VALUES[pt.input] = entity[pt.input]
+    })
+  }
+
+  VALUES.counter++
+
+  proxy.on('proxyReq', function (proxyReq, req, res) {
+    if (options.forceIdentity) {
+      proxyReq.setHeader('Accept-Encoding', 'identity')
+    }
+    if (proxyReq.path === path && (options.request && rules.request[path])) {
+      res.statusCode = rules.request[path].status || 200
+      switchHeaders(res, rules.request[path].headers)
+      const ruleBody = JSON.parse(JSON.stringify(rules.request[path].body))
+      getPassthrough(ruleBody)
+      switchHeaders(res, { 'content-length': JSON.stringify(ruleBody).length + 3 })
+      res.end(JSON.stringify(ruleBody))
+    }
+  })
+  if (!(options.request && rules.request[path])) {
     proxy.on('proxyRes', function (proxyRes, req, res) {
       var body = []
       if (proxyRes.eventNames().length < 2) {
@@ -51,16 +61,19 @@ http.createServer(function (req, res) {
           let response = Buffer.concat(body)
           console.log(`${this.statusCode} ${this.req.method} ${this.req._headers.host} ${this.req.path} HTTP/${this.httpVersion}`)
           res.statusCode = this.statusCode
-          if (OPTIONS.response && rules.response[this.req.path] && rules.response[this.req.path].useIn === counter) {
-            counter++
+          VALUES[this.req.path] = VALUES[this.req.path] + 1 || 0
+          if (options.response && rules.response[this.req.path] &&
+            (!rules.response[this.req.path].useIn || rules.response[this.req.path].useIn.includes(VALUES[this.req.path]))) {
             try {
               response = JSON.parse(response.toString())
-            } catch (error) {}
-            OPTIONS.accesstoken = response.access_token || OPTIONS.accesstoken
+            } catch (error) {
+              response = response.toString()
+            }
+            setPassthrough(response)
             res.statusCode = rules.response[this.req.path].status || res.statusCode
             switchHeaders(res, rules.response[this.req.path].headers)
             const ruleBody = rules.response[this.req.path].body
-            ruleBody.access_token = OPTIONS.accesstoken
+            getPassthrough(ruleBody)
             switchHeaders(res, { 'content-length': JSON.stringify(ruleBody).length })
             res.end(JSON.stringify(ruleBody))
           } else {
