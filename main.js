@@ -3,9 +3,7 @@ const { rules, options } = require('./settings.json')
 const url = require('url')
 var proxy = httpProxy.createProxyServer()
 
-const VALUES = {
-  counter: 0
-}
+let VALUES = {}
 
 http.createServer(function (req, res) {
   var option = {
@@ -13,6 +11,7 @@ http.createServer(function (req, res) {
     selfHandleResponse: true
   }
   const path = new url.URL(req.url).pathname
+  const urlObject = new url.URL(req.url)
 
   const switchHeaders = (res, headers) => {
     if (!res.headersSent && headers) {
@@ -34,18 +33,20 @@ http.createServer(function (req, res) {
     })
   }
 
-  VALUES.counter++
+  const getId = () => (VALUES.countReq + 0 || 0) + (VALUES.countRes + 0 || 0)
 
   proxy.on('proxyReq', function (proxyReq, req, res) {
     if (options.forceIdentity) {
       proxyReq.setHeader('Accept-Encoding', 'identity')
     }
     if (proxyReq.path === path && (options.request && rules.request[path])) {
+      VALUES.countReq = VALUES.countReq + 1 || 1
       res.statusCode = rules.request[path].status || 200
       switchHeaders(res, rules.request[path].headers)
       const ruleBody = JSON.parse(JSON.stringify(rules.request[path].body))
       getPassthrough(ruleBody)
       switchHeaders(res, { 'content-length': JSON.stringify(ruleBody).length + 3 })
+      console.log(`#${getId()} REQ ${res.statusCode} ${proxyReq.method} ${urlObject.host} ${path} HTTP/${req.httpVersion}`)
       res.end(JSON.stringify(ruleBody))
     }
   })
@@ -57,9 +58,10 @@ http.createServer(function (req, res) {
           body.push(chunk)
         })
         proxyRes.on('end', function () {
+          VALUES.countRes = VALUES.countRes + 1 || 1
           switchHeaders(res, this.headers)
           let response = Buffer.concat(body)
-          console.log(`${this.statusCode} ${this.req.method} ${this.req._headers.host} ${this.req.path} HTTP/${this.httpVersion}`)
+          console.log(`#${getId()} RES ${this.statusCode} ${this.req.method} ${this.req._headers.host} ${this.req.path} HTTP/${this.httpVersion}`)
           res.statusCode = this.statusCode
           VALUES[this.req.path] = VALUES[this.req.path] + 1 || 0
           if (options.response && rules.response[this.req.path] &&
@@ -75,6 +77,21 @@ http.createServer(function (req, res) {
             const ruleBody = rules.response[this.req.path].body
             getPassthrough(ruleBody)
             switchHeaders(res, { 'content-length': JSON.stringify(ruleBody).length })
+
+            if (!VALUES.data) {
+              VALUES.data = {}
+            }
+            VALUES.data[getId()] = {
+              request: {
+                body: undefined,
+                headers: req.headers
+              },
+              response: {
+                body: (ruleBody),
+                headers: res.getHeaders()
+              }
+            }
+
             res.end(JSON.stringify(ruleBody))
           } else {
             if (!rules.request[this.req.path]) {
@@ -89,4 +106,5 @@ http.createServer(function (req, res) {
     console.error(err)
   })
   proxy.web(req, res, option)
-}).listen(8008)
+}).listen(options.port)
+console.log('proxy listening at port ' + options.port)
