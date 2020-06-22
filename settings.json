@@ -262,6 +262,7 @@
                         },
                         {
                             "user_name": "reap",
+                            "alias": "Gestor de manteniment especial",
                             "name": "Gestor",
                             "surname1": "REAP",
                             "entity": "LES CORTS UAG",
