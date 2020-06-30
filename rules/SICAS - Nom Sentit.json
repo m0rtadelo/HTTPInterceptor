@@ -23,7 +23,7 @@
                         "genderId": "1",
                         "academicLevelId": "33",
                         "nameMeaning": "NOM SENTIT",
-                        "genreId": "2",
+                        "genreId": "D",
                         "oldCardId": {},
                         "cardId": {
                             "typeId": "D",
@@ -122,7 +122,7 @@
                         "nationalityId": "724",
                         "academicLevelId": "33",
                         "nameMeaning": "NOM SENTIT",
-                        "genreId": "2",
+                        "genreId": "D",
                         "lastModified": "2020-06-11T06:06:00Z",
                         "handicap": {},
                         "residentialAddress": {
