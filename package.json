@@ -1,29 +1,31 @@
 {
-  "name": "my_proxy",
+  "name": "myproxy",
   "version": "1.0.0",
-  "description": "http proxy to inject customized body responses",
+  "description": "Proxy responder",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js"
+    "start": "electron .",
+    "proxy": "node proxy.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "http",
-    "proxy",
-    "mim",
-    "interceptor"
+    "proxy"
   ],
-  "author": "ricard.figuls@altran.com",
+  "author": "ricard.figuls@gmail.com",
   "license": "ISC",
-  "dependencies": {
-    "http-proxy": "^1.18.1"
-  },
   "devDependencies": {
-    "eslint": "^7.2.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "electron": "^9.0.3"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "bootstrap4-toggle": "^3.6.1",
+    "express": "^4.17.1",
+    "http-proxy": "^1.18.1",
+    "jquery": "^3.5.1",
+    "load-json-file": "^6.2.0",
+    "popper.js": "^1.16.1",
+    "recursive-readdir-async": "^1.1.6",
+    "toastr": "^2.1.4"
   }
 }

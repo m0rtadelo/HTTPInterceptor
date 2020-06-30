@@ -1,0 +1,16 @@
+{
+    "passthrough": [
+    ],
+    "response": {},
+    "request": {
+        "/auth/providers": {
+            "status": "200",
+            "body": [{"id": null, "name": "Home Assistant Molón", "type": "homeassistant"}],
+            "headers": {
+                "connection": "close",
+                "transfer-encoding": "identity",
+                "content-type": "application/json;charset=UTF-8"
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "response": {},
+    "request": {
+        "/": {
+            "status": "500",
+            "body": "<html><body><h1>This content has been intercepted</h1></body></html>",
+            "headers": {
+                "content-type": "text/html; charset=UTF-8"
+            }
+        }
+    }
+}

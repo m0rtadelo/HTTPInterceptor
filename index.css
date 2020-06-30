@@ -1,0 +1,334 @@
+body {
+    min-height: 100%;
+    background: lightgray;
+    overflow: hidden;
+    margin: 0px;
+    font-family: sans-serif;
+}
+
+.main-header {
+    position: fixed;
+    width: 100%;
+    height: 3.7em;
+    background: white;
+    font-size: small;
+    z-index: 999;
+}
+
+.header-container {
+    top: 3.7em;
+    position: absolute;
+    background: white;
+    width: 65%;
+    height: 1.8em;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    font-size: small;
+    font-weight: bold;
+}
+
+.container {
+    top: 4.3em;
+    position: absolute;
+    bottom: 0;
+    width: 65%;
+    background: lightgray;
+    overflow-y: auto;
+    max-width: initial;
+    background-image: url(./assets/icon.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-blend-mode: color-dodge;
+}
+
+.panel {
+    position: absolute;
+    top: 3em;
+    bottom: 0;
+    right: 0;
+    width: 35%;
+    background: #d3d3d3;
+}
+
+.detail-header {
+    background: lightgray;
+    height: 1em;
+}
+
+.header {
+    width: fit-content;
+    background: white;
+    border-top: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    font-size: smaller;
+    padding-right: 1em;
+    padding-left: 1em;
+    border-top-right-radius: 0.3em;
+    border-top-left-radius: 0.3em;
+    color: lightslategray;
+    cursor: pointer;
+    position: relative;
+    top: -0.3em;
+}
+
+.header:hover {
+    text-shadow: 0px 0px 1px blue;
+}
+ .headers-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #efefef;     
+    overflow-y: auto;
+ }
+
+ .header-detail {
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #d3d3d3;
+    font-weight: 100;
+    color: black;
+    font-size: smaller;
+ }
+ .header-row1 {
+     width: 35%;
+     position: relative;
+     left: 0;
+     display: inline-block;
+     border-right: 1px solid #d3d3d3;
+ }
+ .header-row2 {
+    width: 65%;
+    position: relative;
+    display: inline-block;
+}
+.selected {
+    color: black;
+}
+.hidden {
+    display: none;
+}
+.content {
+    position: absolute;
+    margin: 0.5em;
+    border: 1px solid #dadada;
+    bottom: 0em;
+    top: 1em;
+    right: 0em;
+    left: 0em;
+    background: #efefef;
+    border-radius: 0.2em;
+    font-family: monospace;
+    color: blue;
+}
+
+.info {
+    position: absolute;
+    width: 100%;
+    background: white;
+    height: 10%;
+    border: 1px solid #d3d3d3;
+    font-family: monospace;
+    font-size: x-small;
+    color: gray;
+    padding: 0.31em;
+    resize: none;
+}
+
+.details {
+    position: relative;
+    background: white;
+    height: 50%;
+    width: 100%;
+    border: 1px solid #dadada;
+}
+
+.detail-title {
+    font-size: small;
+    font-weight: bold;
+    position: absolute;
+    right: 1em;
+    top: -0.2em;
+    color: white;
+}
+
+.request {
+    height: 40%;
+    top: 10%;
+}
+
+.row {
+    background: white;
+    border-top: 1px solid lightgray;
+    font-size: small;
+    position: relative;
+    height: 1.4em;
+    box-shadow: 1px 5px 0.5em;
+}
+
+.selected {
+    color: blue;
+}
+
+.row:hover {
+    background: lightblue;
+}
+
+.code {
+    position: absolute;
+    margin: 0px;
+    width: 100%;
+    /* height: 100%; */
+    font-family: monospace;
+    font-size: x-small;
+    background: #efefef;
+    resize: none;
+    overflow-y: auto;
+    white-space: normal;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0.5em;
+    word-break: break-all;
+}
+
+.icon {
+    position: relative;
+    width: 3em;
+    left: 0.5em;
+    top: 0.3em;
+    height: 3em;
+}
+
+.col1 {
+    position: absolute;
+    width: 3em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.col2 {
+    position: absolute;
+    width: 4em;
+    left: 3em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.col3 {
+    position: absolute;
+    width: 5em;
+    left: 7em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.col4 {
+    position: absolute;
+    width: 12em;
+    left: 12em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.col5 {
+    position: absolute;
+    width: 3em;
+    left: 24em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.col6 {
+    position: absolute;
+    left: 27em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.title {
+    font-size: large;
+    font-weight: bold;
+    position: absolute;
+    top: 0.8em;
+    left: 3em;
+    color: gray;
+
+}
+
+.switch {
+    position: absolute;
+    right: 1em;
+    top: 0.5em;
+}
+
+.rule-selector {
+    position: absolute;
+    right: 13.5em;
+    top: 0.5em;
+}
+
+.options {
+    position: absolute;
+    top: 0.5em;
+    right: 6em;
+}
+
+.floating {
+    position: absolute;
+    right: 1.3em;
+    bottom: 0.1em;
+    background: #efefef;
+    cursor: pointer;
+}
+
+.st200 {
+    background: limegreen;
+    border-radius: 0.4em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    color: white;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.st300 {
+    background: white;
+    border-radius: 0.4em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    color: black;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.st400 {
+    background: orange;
+    border-radius: 0.4em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    color: white;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.st500 {
+    background: red;
+    border-radius: 0.4em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    color: white;
+    font-weight: bold;
+    vertical-align: top;
+}

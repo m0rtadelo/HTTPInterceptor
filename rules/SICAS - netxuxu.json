@@ -1,0 +1,81 @@
+{
+    "passthrough": [
+        { "input": "access_token", "output": "access_token" },
+        { "input": "jti", "output": "jti" }
+    ],
+    "response": {
+        "/api/oauth/token": {
+            "useIn": [0],
+            "status": "200",
+            "headers": {
+                "transfer-encoding": "deflate"
+            },
+            "body": {
+                "access_token": "",
+                "token_type": "bearer",
+                "expires_in": 3599,
+                "scope": "dagda-web",
+                "details": [
+                    {
+                        "user_name": "sicas",
+                        "name": "Administrador",
+                        "surname1": "SICAS",
+                        "entity": "LES CORTS UAG",
+                        "entityName": "BARCELONA EMPLEADA",
+                        "uagCode": "AG08000109",
+                        "managingEntity": "10001",
+                        "managingEntityCenterType": "02",
+                        "sessionId": "JSESSIONID=4dIsNugzykvMoepNFHkPThvWg-6HvPxmpD3h5OtSj3YdaieAKVDt!-994554144!NONE",
+                        "maxInactiveInterval": 900,
+                        "gicarId": "38230023K"
+                    },
+                    {
+                        "user_name": "reap",
+                        "alias": "Gestor de manteniment especial",
+                        "name": "Gestor",
+                        "surname1": "REAP",
+                        "entity": "LES CORTS UAG",
+                        "entityName": "BARCELONA EMPLEADA",
+                        "uagCode": "AG08000109",
+                        "managingEntity": "10001",
+                        "managingEntityCenterType": "02",
+                        "sessionId": "JSESSIONID=4dIsNugzykvMoepNFHkPThvWg-6HvPxmpD3h5OtSj3YdaieAKVDt!-994554144!NONE",
+                        "maxInactiveInterval": 900,
+                        "gicarId": "38230023K"
+                    }
+                ],
+                "jti": "4c23f562-884c-4db3-b7b5-c6a25999536a"
+            }
+        }
+    },
+    "request": {
+        "/api/user": {
+            "status": "200",
+            "headers": {
+                "connection": "close",
+                "transfer-encoding": "identity",
+                "content-type": "application/json;charset=UTF-8"
+            },
+            "body": {
+                "access_token": "ey",
+                "token_type": "bearer",
+                "expires_in": "3599",
+                "scope": "dagda-web",
+                "user_name": "sicas",
+                "details": {
+                    "name": "Administrador",
+                    "surname1": "SICAS",
+                    "entity": "LES CORTS UAG",
+                    "entityName": "BARCELONA EMPLEADA",
+                    "uagCode": "AG08000109",
+                    "managingEntity": "10001",
+                    "managingEntityCenterType": "02",
+                    "sessionId": "",
+                    "maxInactiveInterval": "900",
+                    "gicarId": "38230023K"
+                },
+                "jti": "4c23f562-884c-4db3-b7b5-c6a25999536a"
+            }
+        }
+    }
+}

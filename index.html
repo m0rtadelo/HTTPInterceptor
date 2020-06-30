@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Interceptor</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <script>
+        var $ = require('jquery');
+        var jQuery = $;
+    </script>
+    <div id="main">
+        <div class="main-header">
+            <img class="icon" src="./assets/icon.png" title="myProxy">
+            <span class="title">HTTP Interceptor</span>
+            <span class="rule-selector">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="ruleSelector"></label>
+                        <select class="form-control form-control-sm" id="ruleSelector">
+                        </select>
+                    </div>
+                </form>
+            </span>
+            <span class="options">
+                <div class="dropdown">
+                    <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="#" id="optReset">Reset</a>
+                        <a class="dropdown-item" href="#" id="optOptions">Options</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </span>
+            <span class="switch"><input id="listener" type="checkbox" checked data-toggle="toggle" data-size="sm"></span>
+        </div>
+        <div class="header-container">
+            <span class="col1">#Id</span>
+            <span class="col2">Status</span>
+            <span class="col3">Method</span>
+            <span class="col4">Host</span>
+            <span class="col5">Int.</span>
+            <span class="col6">Path</span>
+        </div>
+        <div class="container" id="container">
+
+        </div>
+        <div class="panel">
+            <textarea class="info" id="info" readonly></textarea>
+            <div class="details request">
+                <div class="detail-header">
+                    <span class="header selected" id="request-headers-label">headers</span>
+                    <span class="header" id="request-body-label">raw</span>
+                    <span class="detail-title">Request</span>
+                </div>
+                <div class="content">
+                    <textarea class="code hidden" id="request-body" readonly></textarea>
+                    <div class="floating hidden" id="request-more">More...</div>
+                    <div class="headers-container" id="request-headers"></div>
+                </div>
+            </div>
+            <div class="details" style="top:10%;">
+                <div class="detail-header">
+                    <span class="header selected" id="response-headers-label">headers</span>
+                    <span class="header" id="response-body-label">raw</span>
+                    <span class="detail-title">Response</span>
+                </div>
+                <div class="content">
+                    <textarea class="code hidden" id="response-body" readonly></textarea>
+                    <div class="floating hidden" id="response-more">More...</div>
+                    <div class="headers-container" id="response-headers"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="node_modules/popper.js/dist/umd/popper-utils.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+    <script src="node_modules/toastr/build/toastr.min.js"></script>
+</body>
+<script>
+    require('./renderer.js')
+</script>
+
+</html>
