@@ -67,13 +67,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run build:ci --if-present
+    #- run: npm run build:ci --if-present
     - run: npm test
     - run: ls -la build/http_interceptor-darwin-x64
-    - uses: montudor/action-zip@v0.1.0
-      with:
-        args: zip -qq -r ./http_interceptor-darwin-x64.zip build/
+    - run: node zip.js
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
-        path: ./http_interceptor-darwin-x64.zip
+        path: build/http_interceptor-darwin-x64.zip
