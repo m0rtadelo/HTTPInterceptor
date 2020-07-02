@@ -29,4 +29,4 @@ paths.forEach(async p => {
   })
 }
 
-await zipped()
+zipped()
