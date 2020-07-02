@@ -69,8 +69,8 @@ jobs:
     - run: npm ci
     - run: npm run build:ci --if-present
     - run: npm test
-    - run: ls build/
+    - run: ls build/http_interceptor-${{runner.os}}
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
-        path: build/                
+        path: build/http_interceptor-${{runner.os}}                
