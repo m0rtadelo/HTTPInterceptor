@@ -1,12 +1,13 @@
 {
   "name": "myproxy",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Proxy responder",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "proxy": "node proxy.js",
     "build": "node build.js && exit 0",
+    "build:ci": "electron-packager . --overwrite --out=build --icon=assets/icon.png",
     "test": "echo \"Error: no test yet\" && exit 0"
   },
   "keywords": [
