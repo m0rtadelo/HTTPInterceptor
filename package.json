@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron .",
     "proxy": "node proxy.js",
+    "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,7 +16,11 @@
   "author": "ricard.figuls@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.0.3"
+    "electron": "^9.0.3",
+    "electron-packager": "^15.0.0",
+    "electron-rebuild": "^1.11.0",
+    "fs-extra": "^9.0.1",
+    "zip-a-folder": "0.0.12"
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
