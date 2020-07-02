@@ -29,5 +29,5 @@ jobs:
     - run: npm test
     - uses: actions/upload-artifact@v2
       with:
-        name: http_interceptor-${{ runs-on }}
+        name: http_interceptor
         path: build/
