@@ -1,5 +1,5 @@
 {
-  "name": "myproxy",
+  "name": "http_interceptor",
   "version": "0.0.1",
   "description": "Proxy responder",
   "main": "main.js",
