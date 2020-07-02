@@ -70,7 +70,10 @@ jobs:
     - run: npm run build:ci --if-present
     - run: npm test
     - run: ls -la build/http_interceptor-darwin-x64
+    - uses: montudor/action-zip@v0.1.0
+      with:
+        args: zip -qq -r ./http_interceptor-darwin-x64.zip build/
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
-        path: build/http_interceptor-darwin-x64/http_interceptor.app/*
+        path: ./http_interceptor-darwin-x64.zip
