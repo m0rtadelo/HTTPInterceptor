@@ -69,7 +69,7 @@ jobs:
     - run: npm ci
     #- run: npm run build:ci --if-present
     - run: npm test
-    - run: ls -la build/http_interceptor-darwin-x64
+    #- run: ls -la build/http_interceptor-darwin-x64
     - run: node zip.js
     - uses: actions/upload-artifact@v2
       with:
