@@ -7,7 +7,7 @@
     "start": "electron .",
     "proxy": "node proxy.js",
     "build": "node build.js && exit 0",
-    "build:ci": "electron-packager . --overwrite --out=build --icon=assets/icon.png",
+    "build:ci": "node buildci.js",
     "test": "echo \"Error: no test yet\" && exit 0"
   },
   "keywords": [

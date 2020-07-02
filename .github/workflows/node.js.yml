@@ -25,8 +25,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run build:ci --if-present
     - run: npm test
+    - run: npm run build:ci --if-present
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
@@ -46,8 +46,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run build:ci --if-present
     - run: npm test
+    - run: npm run build:ci --if-present
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
@@ -67,10 +67,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    #- run: npm run build:ci --if-present
     - run: npm test
-    #- run: ls -la build/http_interceptor-darwin-x64
-    - run: node zip.js
+    - run: npm run build:ci --if-present
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
