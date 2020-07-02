@@ -1,3 +1,6 @@
+const { zip } = require("zip-a-folder")
+
+async function zipped() {
 var options = {
     all: false,
     dir: './',
@@ -24,3 +27,6 @@ paths.forEach(async p => {
     await zip('./' + p, './' + name + '.zip')
     console.log(p + '.zip file created!')
   })
+}
+
+await zipped()
