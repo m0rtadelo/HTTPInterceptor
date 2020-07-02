@@ -1,18 +1,23 @@
-const { zip } = require("zip-a-folder")
+const packager = require('electron-packager')
+const { rebuild } = require('electron-rebuild')
+const { zip } = require('zip-a-folder')
+const { version } = require('./package.json')
+const fs = require('fs-extra')
+
 
 async function zipped() {
 var options = {
     all: false,
     dir: './',
     'app-copyright': 'Ricard Fíguls',
-    'app-version': '0.0.1',
+    'app-version': version,
     icon: './assets/icon.png',
     name: 'HTTPInterceptor',
     ignore: ['.build/', './.git', '/.nyc_output', '/coverage', '.auth.json', '.build.js', '/tests', '.myteam', '.pdf', '.docx'],
     out: './build',
     overwrite: true,
     prune: true,
-    version: '0.0.1',
+    version: version,
     'version-string': {
       CompanyName: 'RFM Software',
       FileDescription: 'HTTPInterceptor',
