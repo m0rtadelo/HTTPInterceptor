@@ -74,7 +74,7 @@ jobs:
         name: http_interceptor-linux-arm64
         path: build/HTTPInterceptor-linux-arm64.zip
 
-  build-macos:
+  build-darwin:
 
     runs-on: [ macos-latest ]
 
