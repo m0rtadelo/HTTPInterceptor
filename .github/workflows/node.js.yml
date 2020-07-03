@@ -52,12 +52,15 @@ jobs:
       with:
         name: http_interceptor-linux-x64
         path: build/HTTPInterceptor-linux-x64.zip
+    - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-linux-armv7l
         path: build/HTTPInterceptor-linux-armv7l.zip        
+    - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-linux-ia32
         path: build/HTTPInterceptor-linux-ia32.zip        
+    - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-linux-arm64
         path: build/HTTPInterceptor-linux-arm64.zip
