@@ -69,7 +69,12 @@ function createWindow() {
 
 ipcMain.on('load', (event, arg) => {
   rra.list('./rules').then(files => {
-    event.reply('load', { init:{ listen: Proxy.options.listen }, rules: files.filter(item => !item.isDirectory) })
+    event.reply('load', 
+      {
+        init:{ listen: Proxy.options.listen },
+        rules: files && !files.error ? files.filter(item => !item.isDirectory) : []
+      }
+    )
   })
 })
 app.whenReady().then(createWindow)

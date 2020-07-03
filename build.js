@@ -4,7 +4,8 @@ const { zip } = require('zip-a-folder')
 const { version } = require('./package.json')
 const fs = require('fs-extra')
 
-const doRebuild = true
+const doRebuild = false
+const doZip = true
 
 var options = {
   all: false,
@@ -15,7 +16,7 @@ var options = {
   'app-version': version,
   icon: './assets/icon.png',
   name: 'HTTPInterceptor',
-  ignore: ['.build/', './.git', '/.nyc_output', '/coverage', '.auth.json', '.build.js', '/tests', '.myteam', '.pdf', '.docx'],
+  ignore: ['.build/', './.git', '/.nyc_output', '/coverage', '.auth.json', '.build.js', '/tests', '.myteam', '.pdf', '.docx', '.github', 'rules'],
   out: './build',
   overwrite: true,
   prune: true,
@@ -44,12 +45,14 @@ async function build () {
   fs.removeSync('./build', { recursive: true })
   console.log('Building version ' + version + ' for ' + process.platform + '...')
   const paths = await packager(options)
-  console.log('zipping files...')
-  paths.forEach(async p => {
-    const name = p.split(' /').pop()
-    await zip('./' + p, './' + name + '.zip')
-    console.log(p + '.zip file created!')
-  })
+  if (doZip) {
+    console.log('zipping files...')
+    paths.forEach(async p => {
+      const name = p.split(' /').pop()
+      await zip('./' + p, './' + name + '.zip')
+      console.log(p + '.zip file created!')
+    })
+  }
 }
 
 build()

@@ -26,7 +26,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm test
-    - run: npm run build:ci --if-present
+    - run: npm run build --if-present
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
@@ -47,11 +47,21 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm test
-    - run: npm run build:ci --if-present
+    - run: npm run build --if-present
     - uses: actions/upload-artifact@v2
       with:
-        name: http_interceptor-${{runner.os}}
+        name: http_interceptor-linux-x64
         path: build/HTTPInterceptor-linux-x64.zip
+      with:
+        name: http_interceptor-linux-armv7l
+        path: build/HTTPInterceptor-linux-armv7l.zip        
+      with:
+        name: http_interceptor-linux-ia32
+        path: build/HTTPInterceptor-linux-ia32.zip        
+      with:
+        name: http_interceptor-linux-arm64
+        path: build/HTTPInterceptor-linux-arm64.zip
+
   build-macos:
 
     runs-on: [ macos-latest ]
@@ -68,7 +78,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm test
-    - run: npm run build:ci --if-present
+    - run: npm run build --if-present
     - uses: actions/upload-artifact@v2
       with:
         name: http_interceptor-${{runner.os}}
