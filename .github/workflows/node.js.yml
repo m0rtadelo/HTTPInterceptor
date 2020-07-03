@@ -29,8 +29,17 @@ jobs:
     - run: npm run build --if-present
     - uses: actions/upload-artifact@v2
       with:
-        name: http_interceptor-${{runner.os}}
+        name: http_interceptor-win32-x64
         path: build/HTTPInterceptor-win32-x64.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        name: http_interceptor-win32-ia32
+        path: build/HTTPInterceptor-win32-ia32.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        name: http_interceptor-win32-arm64
+        path: build/HTTPInterceptor-win32-arm64.zip
+  
   build-linux:
 
     runs-on: [ ubuntu-latest ]
@@ -84,5 +93,5 @@ jobs:
     - run: npm run build --if-present
     - uses: actions/upload-artifact@v2
       with:
-        name: http_interceptor-${{runner.os}}
+        name: http_interceptor-darwin-x64
         path: build/HTTPInterceptor-darwin-x64.zip
