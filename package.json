@@ -4,7 +4,7 @@
   "description": "Proxy responder",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron ./src/main.js",
     "proxy": "node proxy.js",
     "build": "node build.js && exit 0",
     "build:ci": "node buildci.js",
@@ -20,6 +20,12 @@
     "electron": "^9.0.3",
     "electron-packager": "^15.0.0",
     "electron-rebuild": "^1.11.0",
+    "eslint": "^7.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "fs-extra": "^9.0.1",
     "zip-a-folder": "0.0.12"
   },
@@ -32,6 +38,7 @@
     "load-json-file": "^6.2.0",
     "popper.js": "^1.16.1",
     "recursive-readdir-async": "^1.1.6",
+    "write-json-file": "^1.0.0",
     "toastr": "^2.1.4"
   }
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link rel="stylesheet" href="../node_modules/toastr/build/toastr.min.css">
+</head>
+
+<body>
+    <script>
+        var $ = require('jquery');
+        var jQuery = $;
+    </script>
+    <div class="container-fluid">
+
+        <div class="alert alert-light" role="alert">
+            Actual settings. You can change the settings (press the save button to use this settings on init)
+        </div>
+
+        <form>
+            <div class="form-group row">
+                <div class="col">
+                    Listening port
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="port">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col">Listen on init</div>
+                <div class="col">
+                    <div class="form-check" style="float:right;">
+                        <input sdata-toggle="toggle" type="checkbox" id="listen">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">Disable cache</div>
+                <div class="col">
+                    <div class="form-check" style="float:right;">
+                        <input sdata-toggle="toggle" type="checkbox" id="disableCache">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">Avoid compress</div>
+                <div class="col">
+                    <div class="form-check" style="float:right;">
+                        <input sdata-toggle="toggle" type="checkbox" id="forceIdentity">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button id="save" button="submit" class="btn btn-primary col-sm-10">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="../node_modules/popper.js/dist/umd/popper-utils.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+    <script>
+        var ipcRenderer = require('electron').ipcRenderer;
+        function getOptions() {
+            return {
+                port: document.getElementById('port').value,
+                listen: document.getElementById('listen').checked,
+                disableCache: document.getElementById('disableCache').checked,
+                forceIdentity: document.getElementById('forceIdentity').checked
+            }
+        }
+        ipcRenderer.on('settings', function (event, options) {
+            setTimeout(() => {
+                document.getElementById('port').value = options.port
+                document.getElementById('listen').checked = options.listen
+                document.getElementById('disableCache').checked = options.disableCache
+                document.getElementById('forceIdentity').checked = options.forceIdentity
+            }, 1)
+        })
+        window.addEventListener('unload', () => {
+            ipcRenderer.send('options-set', getOptions())
+        })
+        document.getElementById('save').addEventListener('click', () => {
+            ipcRenderer.send('options-save', getOptions())
+            window.close()
+        })
+    </script>
+</body>
+
+</html>

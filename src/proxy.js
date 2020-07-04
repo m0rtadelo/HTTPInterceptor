@@ -1,9 +1,9 @@
 const http = require('http'); const httpProxy = require('http-proxy')
-const { options } = require('./settings.json')
+const options = require('./models/settings')
 const url = require('url')
 
 var proxy = httpProxy.createProxyServer()
-let rules = {request: {}, response: {}}
+let rules = { request: {}, response: {} }
 
 const Proxy = {
   win: undefined,
@@ -11,7 +11,7 @@ const Proxy = {
   VALUES: {},
   REQS: {},
   setRules: (jsonRules) => {
-    rules = jsonRules || {request: {}, response: {}}
+    rules = jsonRules || { request: {}, response: {} }
   },
   reset: () => {
     Proxy.VALUES = {}
@@ -33,9 +33,9 @@ const Proxy = {
     }
 
     const getPassthrough = (entity) => {
-      if (rules.passthrough){
+      if (rules.passthrough) {
         rules.passthrough.forEach((pt) => {
-          if(entity[pt.output]) {
+          if (entity[pt.output]) {
             entity[pt.output] = Proxy.VALUES[pt.input]
           }
         })
@@ -77,15 +77,15 @@ const Proxy = {
       Proxy.REQS[path] = true
       proxy.on('proxyReq', function (proxyReq, req, res) {
         this._path = proxyReq.path
-        if (options.forceIdentity) {
+        if (options.getForceIdentity()) {
           proxyReq.setHeader('Accept-Encoding', 'identity')
         }
-        if (options.disableCache) {
+        if (options.getDisableCache()) {
           proxyReq.setHeader('If-Modified-Since', '')
           proxyReq.setHeader('ETag', '')
           proxyReq.setHeader('If-None-Match', '')
         }
-        if (req._events['data'].length < 3) {
+        if (req._events.data.length < 3) {
           req.on('data', function (chunk) {
             if (!Proxy.VALUES.request) {
               Proxy.VALUES.request = {}
@@ -93,13 +93,13 @@ const Proxy = {
             Proxy.VALUES.request[new url.URL(req.url).pathname] = chunk.toString()
           })
         }
-        if (proxyReq.path === path && (options.request && rules.request[path])) {
+        if (proxyReq.path === path && rules.request[path]) {
           res.statusCode = rules.request[path].status || 200
           switchHeaders(res, rules.request[path].headers)
           const ruleBody = JSON.parse(JSON.stringify(rules.request[path].body))
           getPassthrough(ruleBody)
           let strRuleBody = JSON.stringify(ruleBody)
-          if(res.getHeaders()['content-type'].includes('text')) {
+          if (res.getHeaders()['content-type'].includes('text')) {
             strRuleBody = rules.request[path].body
           }
           switchHeaders(res, { 'content-length': Buffer.from(strRuleBody).length })
@@ -115,7 +115,7 @@ const Proxy = {
         }
       })
     }
-    if (!(options.request && rules.request[path])) {
+    if (!rules.request[path]) {
       proxy.on('proxyRes', function (proxyRes, req, res) {
         var body = []
         if (proxyRes.eventNames().length < 2) {
@@ -130,7 +130,7 @@ const Proxy = {
 
               Proxy.VALUES[this.req.path] = Proxy.VALUES[this.req.path] + 1 || 0
               res.statusCode = this.statusCode
-              
+
               addData(getId(), 'REQ', this.statusCode, this.req.method, this.req._headers.host, this.req.path, this.httpVersion, {
                 body: Proxy.VALUES.request ? Proxy.VALUES.request[this.req.path] : undefined,
                 headers: req.headers
@@ -139,7 +139,7 @@ const Proxy = {
                 body: response.toString(),
                 headers: res.getHeaders()
               })
-              if (options.response && rules.response[this.req.path] &&
+              if (rules.response[this.req.path] &&
                 (!rules.response[this.req.path].useIn || rules.response[this.req.path].useIn.includes(Proxy.VALUES[this.req.path]))) {
                 try {
                   response = JSON.parse(response.toString())

@@ -1,10 +1,6 @@
 {
-    "options": {
-        "forceIdentity": true,
-        "disableCache": true,
-        "request": true,
-        "response": true,
-        "port": 8008,
-        "listen": true
-    }
+	"port": "8008",
+	"listen": true,
+	"disableCache": true,
+	"forceIdentity": true
 }
