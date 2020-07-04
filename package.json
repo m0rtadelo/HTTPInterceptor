@@ -7,7 +7,7 @@
     "start": "electron ./src/main.js",
     "proxy": "node proxy.js",
     "build": "node build.js && exit 0",
-    "test": "echo \"Error: no test yet\" && exit 0"
+    "test": "echo \"Info: no tests yet\" && exit 0"
   },
   "keywords": [
     "http",

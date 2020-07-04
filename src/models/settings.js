@@ -10,24 +10,14 @@ let values = {
 const options = {
   getValues: () => values,
   setValues: (data) => { values = data },
-  getForceIdentity: () => values.forceIdentity,
-  getDisableCache: () => values.disableCache,
-  getPort: () => values.port,
   getListen: () => values.listen,
-  setForceIdentity: (value) => { values.forceIdentity = value },
-  setDisableCache: (value) => { values.disableCache = value },
-  setPort: (value) => { values.port = value },
-  setListen: (value) => { values.listen = value },
   save: (data) => {
     if (data) { options.setValues(data) }
     wj('./settings.json', values).catch(err => { console.error(err) })
   },
   load: () => {
     lj('./settings.json').then(opts => {
-      values.forceIdentity = opts.forceIdentity
-      values.disableCache = opts.disableCache
-      values.port = opts.port
-      values.listen = opts.listen
+      values = opts
     }).catch(err => { console.error(err) })
   }
 }
