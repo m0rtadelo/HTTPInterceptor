@@ -11,6 +11,9 @@ const options = {
   getValues: () => values,
   setValues: (data) => { values = data },
   getListen: () => values.listen,
+  getPort: () => values.port,
+  getForceIdentity: () => values.forceIdentity,
+  getDisableCache: () => values.disableCache,
   save: (data) => {
     if (data) { options.setValues(data) }
     wj('./settings.json', values).catch(err => { console.error(err) })
