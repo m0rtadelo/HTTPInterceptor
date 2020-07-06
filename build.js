@@ -8,7 +8,7 @@ const doRebuild = false
 const doZip = true
 
 var options = {
-  asar: false,
+  asar: true,
   all: false,
   platform: process.platform,
   arch: 'all',

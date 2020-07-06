@@ -2,6 +2,7 @@ const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
 const rra = require('recursive-readdir-async')
 const lj = require('load-json-file')
+
 const DEV = false
 
 const Proxy = require('./src/proxy.js').Proxy
