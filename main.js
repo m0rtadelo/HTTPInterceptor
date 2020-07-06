@@ -4,7 +4,7 @@ const rra = require('recursive-readdir-async')
 const lj = require('load-json-file')
 const DEV = false
 
-const Proxy = require('./proxy.js').Proxy
+const Proxy = require('./src/proxy.js').Proxy
 let _Server
 function createWindow () {
   const win = new BrowserWindow({
@@ -15,7 +15,7 @@ function createWindow () {
     }
   })
   win.menuBarVisible = false
-  win.loadFile('views/main/main.html')
+  win.loadFile('src/views/main/main.html')
   if (DEV) {
     win.webContents.openDevTools()
   }
@@ -42,7 +42,7 @@ function createWindow () {
       options.webContents.openDevTools()
     }
     options.menuBarVisible = false
-    options.loadFile('./views/settings/settings.html')
+    options.loadFile('src/views/settings/settings.html')
     options.webContents.on('did-finish-load', () => {
       options.webContents.send('settings', Proxy.options.getValues())
     })

@@ -4,7 +4,7 @@
   "description": "Proxy responder",
   "main": "main.js",
   "scripts": {
-    "start": "electron ./src/main.js",
+    "start": "electron ./main.js",
     "proxy": "node proxy.js",
     "build": "node build.js && exit 0",
     "test": "echo \"Info: no tests yet\" && exit 0"
