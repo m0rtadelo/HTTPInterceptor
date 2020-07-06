@@ -2,6 +2,7 @@ const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
 const rra = require('recursive-readdir-async')
 const lj = require('load-json-file')
+const DEV = false
 
 const Proxy = require('./proxy.js').Proxy
 let _Server
@@ -15,11 +16,13 @@ function createWindow () {
   })
   win.menuBarVisible = false
   win.loadFile('index.html')
-  // win.webContents.openDevTools()
+  if (DEV) {
+    win.webContents.openDevTools()
+  }
   Proxy.win = win
   try {
     if (Proxy.options.getListen()) {
-      _Server = Proxy.http().listen(Proxy.options.port)
+      _Server = Proxy.http().listen(Proxy.options.getPort())
     }
   } catch (error) {
     console.error(error, 'Error listening')
@@ -35,7 +38,9 @@ function createWindow () {
         nodeIntegration: true
       }
     })
-    // options.webContents.openDevTools()
+    if (DEV) {
+      options.webContents.openDevTools()
+    }
     options.menuBarVisible = false
     options.loadFile('./options.html')
     options.webContents.on('did-finish-load', () => {
