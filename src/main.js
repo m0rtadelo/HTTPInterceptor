@@ -15,7 +15,7 @@ function createWindow () {
     }
   })
   win.menuBarVisible = false
-  win.loadFile('index.html')
+  win.loadFile('views/main/main.html')
   if (DEV) {
     win.webContents.openDevTools()
   }
@@ -42,7 +42,7 @@ function createWindow () {
       options.webContents.openDevTools()
     }
     options.menuBarVisible = false
-    options.loadFile('./options.html')
+    options.loadFile('./views/settings/settings.html')
     options.webContents.on('did-finish-load', () => {
       options.webContents.send('settings', Proxy.options.getValues())
     })

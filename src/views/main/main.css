@@ -35,7 +35,7 @@ body {
     background: lightgray;
     overflow-y: auto;
     max-width: initial;
-    background-image: url(../assets/icon.png);
+    background-image: url(../../../assets/icon.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
