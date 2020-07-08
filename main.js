@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
 
-const files = require('./src/services/files')
 const rules = require('./src/models/rules')
 
 const DEV = false
@@ -64,7 +63,7 @@ function createWindow () {
     if (!data) {
       Proxy.setRules(data)
     } else {
-      files.loadJson(data.fullname).then(content => {
+      rules.getRule(data).then(content => {
         Proxy.setRules(content)
       })
     }
