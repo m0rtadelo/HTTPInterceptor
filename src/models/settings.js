@@ -1,7 +1,7 @@
 const lj = require('load-json-file')
 const wj = require('write-json-file')
 
-const Files = require('../services/files')
+const files = require('../services/files')
 
 let values = {
   forceIdentity: true,
@@ -18,10 +18,10 @@ const options = {
   getDisableCache: () => values.disableCache,
   save: (data) => {
     if (data) { options.setValues(data) }
-    wj(Files.appDir().concat('settings.json'), values).catch(err => { console.error(err) })
+    wj(files.appDir().concat('settings.json'), values).catch(err => { console.error(err) })
   },
   load: () => {
-    lj(Files.appDir().concat('settings.json')).then(opts => {
+    lj(files.appDir().concat('settings.json')).then(opts => {
       values = opts
     }).catch(err => { console.error(err) })
   }

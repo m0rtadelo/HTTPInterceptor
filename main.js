@@ -1,7 +1,8 @@
 const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
-const rra = require('recursive-readdir-async')
-const lj = require('load-json-file')
+
+const files = require('./src/services/files')
+const rules = require('./src/models/rules')
 
 const DEV = false
 
@@ -63,7 +64,7 @@ function createWindow () {
     if (!data) {
       Proxy.setRules(data)
     } else {
-      lj(data.fullname).then(content => {
+      files.loadJson(data.fullname).then(content => {
         Proxy.setRules(content)
       })
     }
@@ -84,7 +85,7 @@ function createWindow () {
 }
 
 ipcMain.on('load', (event, arg) => {
-  rra.list('./rules').then(files => {
+  rules.getRules().then(files => {
     event.reply('load',
       {
         init: { listen: Proxy.options.getListen() },
