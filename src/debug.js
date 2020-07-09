@@ -1,2 +1,2 @@
-const Proxy = require('./proxy.js').Proxy
-Proxy.http().listen(Proxy.options.port)
+const proxy = require('./proxy.js').proxy
+proxy.http().listen(proxy.options.port)

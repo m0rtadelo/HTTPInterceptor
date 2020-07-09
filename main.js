@@ -5,7 +5,7 @@ const rules = require('./src/models/rules')
 
 const DEV = false
 
-const Proxy = require('./src/proxy.js').Proxy
+const proxy = require('./src/proxy.js').proxy
 let _Server
 function createWindow () {
   const win = new BrowserWindow({
@@ -20,10 +20,10 @@ function createWindow () {
   if (DEV) {
     win.webContents.openDevTools()
   }
-  Proxy.win = win
+  proxy.win = win
   try {
-    if (Proxy.options.getListen()) {
-      _Server = Proxy.http().listen(Proxy.options.getPort())
+    if (proxy.options.getListen()) {
+      _Server = proxy.http().listen(proxy.options.getPort())
     }
   } catch (error) {
     console.error(error, 'Error listening')
@@ -45,35 +45,35 @@ function createWindow () {
     options.menuBarVisible = false
     options.loadFile('src/views/settings/settings.html')
     options.webContents.on('did-finish-load', () => {
-      options.webContents.send('settings', Proxy.options.getValues())
+      options.webContents.send('settings', proxy.options.getValues())
     })
   })
 
   ipcMain.on('options-set', (event, args) => {
-    Proxy.options.setValues(args)
+    proxy.options.setValues(args)
   })
   ipcMain.on('options-save', (event, args) => {
-    Proxy.options.save(args)
+    proxy.options.save(args)
   })
   ipcMain.on('reset', (event, arg) => {
-    Proxy.reset()
+    proxy.reset()
   })
 
   ipcMain.on('rule', (event, data) => {
     if (!data) {
-      Proxy.setRules(data)
+      proxy.setRules(data)
     } else {
       rules.getRule(data).then(content => {
-        Proxy.setRules(content)
+        proxy.setRules(content)
       })
     }
   })
   ipcMain.on('listen', (event, data) => {
     if (data) {
       if (_Server) {
-        _Server.listen(Proxy.options.getPort())
+        _Server.listen(proxy.options.getPort())
       } else {
-        _Server = Proxy.http().listen(Proxy.options.getPort())
+        _Server = proxy.http().listen(proxy.options.getPort())
       }
     } else {
       if (_Server) {
@@ -87,7 +87,7 @@ ipcMain.on('load', (event, arg) => {
   rules.getRules().then(files => {
     event.reply('load',
       {
-        init: { listen: Proxy.options.getListen() },
+        init: { listen: proxy.options.getListen() },
         rules: files && !files.error ? files.filter(item => !item.isDirectory) : []
       }
     )

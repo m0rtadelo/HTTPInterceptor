@@ -16,7 +16,7 @@ toastr.options = {
   extendedTimeOut: 1000
 }
 
-const View = {
+const view = {
   VALUES: {},
   cut: function (value, id) {
     if (value && value.length > 5000) {
@@ -35,10 +35,10 @@ const View = {
         headers.innerHTML += `<div class="header-detail"><span class="header-row1">${key}</span><span class="header-row2">${item.headers[key]}</span></div>`
       })
     }
-    View.VALUES.selected = value
-    const item = View.VALUES[value]
-    document.getElementById('request-body').innerText = View.cut(item.request.body, 'request')
-    document.getElementById('response-body').innerText = View.cut(item.response.body, 'response')
+    view.VALUES.selected = value
+    const item = view.VALUES[value]
+    document.getElementById('request-body').innerText = view.cut(item.request.body, 'request')
+    document.getElementById('response-body').innerText = view.cut(item.response.body, 'response')
     document.getElementById('info').innerText = `${item.info.method} http://${item.info.host}${item.info.path} HTTP/${item.info.httpVersion}`
     setHeaders('response', item.response)
     setHeaders('request', item.request)
@@ -82,7 +82,7 @@ const View = {
     })
     document.getElementById('optReset').addEventListener('click', () => {
       ipcRenderer.send('reset')
-      View.VALUES = {}
+      view.VALUES = {}
       document.getElementById('container').innerHTML = ''
       document.getElementById('info').innerHTML = ''
       document.getElementById('request-body').innerHTML = ''
@@ -91,24 +91,24 @@ const View = {
       document.getElementById('response-headers').innerHTML = ''
     })
     document.getElementById('request-headers-label').addEventListener('click', () => {
-      View.setPanel('request-headers')
+      view.setPanel('request-headers')
     })
     document.getElementById('request-body-label').addEventListener('click', () => {
-      View.setPanel('request-body')
+      view.setPanel('request-body')
     })
     document.getElementById('response-headers-label').addEventListener('click', () => {
-      View.setPanel('response-headers')
+      view.setPanel('response-headers')
     })
     document.getElementById('response-body-label').addEventListener('click', () => {
-      View.setPanel('response-body')
+      view.setPanel('response-body')
     })
     document.getElementById('request-more').addEventListener('click', () => {
       document.getElementById('request-more').className = 'floating hidden'
-      document.getElementById('request-body').innerText = View.VALUES[View.VALUES.selected].request.body
+      document.getElementById('request-body').innerText = view.VALUES[view.VALUES.selected].request.body
     })
     document.getElementById('response-more').addEventListener('click', () => {
       document.getElementById('response-more').className = 'floating hidden'
-      document.getElementById('response-body').innerText = View.VALUES[View.VALUES.selected].response.body
+      document.getElementById('response-body').innerText = view.VALUES[view.VALUES.selected].response.body
     })
     $('#listener').change((e) => {
       ipcRenderer.send('listen', e.target.checked)
@@ -117,11 +117,11 @@ const View = {
 }
 
 ipcRenderer.on('info', function (event, data) {
-  View.VALUES[data.info.id] = data
+  view.VALUES[data.info.id] = data
   document.getElementById('container').innerHTML += `
     <div id="${data.info.id}" class="row">
         <span id="${data.info.id}" class="col1">${data.info.id}</span>
-        <span id="${data.info.id}" class="col2"><span class="${View.getClass(data.info.status)}">${data.info.status}</span></span>
+        <span id="${data.info.id}" class="col2"><span class="${view.getClass(data.info.status)}">${data.info.status}</span></span>
         <span id="${data.info.id}" class="col3">${data.info.method}</span>
         <span id="${data.info.id}" class="col4">${data.info.host}</span>
         <span id="${data.info.id}" class="col5">${data.info.request ? 'req' : data.info.response ? 'res' : ''}</span>
@@ -132,7 +132,7 @@ ipcRenderer.on('info', function (event, data) {
     row.addEventListener('click', function (event) {
       document.querySelectorAll('.row').forEach(row => { row.className = 'row' })
       document.querySelector("div.container div[id='" + event.target.id + "']").className = 'row selected'
-      View.show(event.target.id)
+      view.show(event.target.id)
     })
     row.addEventListener('contextmenu', function (event) {
       event.preventDefault()
@@ -142,19 +142,19 @@ ipcRenderer.on('info', function (event, data) {
 })
 
 ipcRenderer.on('load', function (event, data) {
-  View.addListeners()
+  view.addListeners()
   const sltRule = document.getElementById('ruleSelector')
   sltRule.innerHTML = '<option value="">No rule</option>'
   sltRule.addEventListener('change', (event) => {
     if (event.target.value !== '') {
-      toastr.info('set rule to: <strong>' + View.rules[event.target.value].name + '</strong>', 'set rule')
+      toastr.info('set rule to: <strong>' + view.rules[event.target.value].name + '</strong>', 'set rule')
     } else {
       toastr.info('disabling previous rules, no rules defined', 'disable rule')
     }
-    View.ruleId = event.target.value
-    ipcRenderer.send('rule', View.rules[View.ruleId])
+    view.ruleId = event.target.value
+    ipcRenderer.send('rule', view.rules[view.ruleId])
   })
-  View.rules = data.rules
+  view.rules = data.rules
   for (var i = 0; i < data.rules.length; i++) {
     sltRule.innerHTML += '<option value="' + i + '">' + data.rules[i].name + '</option>'
   }

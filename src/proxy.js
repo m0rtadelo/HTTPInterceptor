@@ -170,4 +170,4 @@ const Proxy = {
   })
 }
 
-exports.Proxy = Proxy
+exports.proxy = Proxy
