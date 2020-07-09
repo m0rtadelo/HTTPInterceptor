@@ -130,7 +130,7 @@ ipcRenderer.on('info', function (event, data) {
 
   document.querySelectorAll('.row').forEach(row => {
     row.addEventListener('click', function (event) {
-      document.querySelectorAll('.row').forEach(row => row.className = 'row')
+      document.querySelectorAll('.row').forEach(row => { row.className = 'row' })
       document.querySelector("div.container div[id='" + event.target.id + "']").className = 'row selected'
       View.show(event.target.id)
     })
