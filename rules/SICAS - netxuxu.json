@@ -19,28 +19,14 @@
                     {
                         "user_name": "sicas",
                         "name": "Administrador",
-                        "surname1": "SICAS",
-                        "entity": "LES CORTS UAG",
                         "entityName": "BARCELONA EMPLEADA",
-                        "uagCode": "AG08000109",
-                        "managingEntity": "10001",
-                        "managingEntityCenterType": "02",
-                        "sessionId": "JSESSIONID=4dIsNugzykvMoepNFHkPThvWg-6HvPxmpD3h5OtSj3YdaieAKVDt!-994554144!NONE",
-                        "maxInactiveInterval": 900,
                         "gicarId": "38230023K"
                     },
                     {
                         "user_name": "reap",
                         "alias": "Gestor de manteniment especial",
                         "name": "Gestor",
-                        "surname1": "REAP",
-                        "entity": "LES CORTS UAG",
                         "entityName": "BARCELONA EMPLEADA",
-                        "uagCode": "AG08000109",
-                        "managingEntity": "10001",
-                        "managingEntityCenterType": "02",
-                        "sessionId": "JSESSIONID=4dIsNugzykvMoepNFHkPThvWg-6HvPxmpD3h5OtSj3YdaieAKVDt!-994554144!NONE",
-                        "maxInactiveInterval": 900,
                         "gicarId": "38230023K"
                     }
                 ],
