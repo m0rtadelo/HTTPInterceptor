@@ -17,7 +17,7 @@ var options = {
   'app-version': version,
   icon: './assets/icon.png',
   name: 'HTTPInterceptor',
-  ignore: ['.build/', './.git', '/.nyc_output', '/coverage', '.auth.json', '.build.js', '/tests', '.myteam', '.pdf', '.docx', '.github', 'rules'],
+  ignore: ['.build/', './.git', '/.nyc_output', '/coverage', '.auth.json', '.build.js', '/tests', '.myteam', '.pdf', '.docx', '.github'],
   out: './build',
   overwrite: true,
   prune: true,
