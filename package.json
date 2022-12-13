@@ -31,7 +31,7 @@
   "dependencies": {
     "bootstrap": "^4.5.0",
     "bootstrap4-toggle": "^3.6.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "http-proxy": "^1.18.1",
     "jquery": "^3.5.1",
     "load-json-file": "^6.2.0",
